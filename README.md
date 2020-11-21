@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## NgRx Store 
+
+0. Mainly for managing global state across entire app. 
+1. store : controlled state container designed to help write performant and consistent app. 
+2. Key concepts 
+   Actions : unique event that are dispatched from comp & services.
+   Reducers : for state changes, take current state & latest action to compute a new state. 
+   Selectors : pure function used to select, derive & compose piece of state. 
+3. 3 dots in typescript : returns all elements of array. 
+4. state : maintained in the store. immutable. 
+5. selector : comp can subscribe to the store and get automatic update of state through selectors. enable comp to get a slice of state.
+6. action : modify state of store by using reducers that enable changes. 
+7. effects : occur as a result from actions. create async service call to API. 
+
+
+
+

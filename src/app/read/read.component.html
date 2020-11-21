@@ -1,0 +1,29 @@
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+
+<div class="right" *ngIf="tutorials">
+<h3> Tutorial </h3>
+<ul *ngIf="showBool">
+	<li  *ngFor="let tutorial of tutorials | async; let i = index">
+		<a href="{{tutorial.email}}" target="_blank"> {{ tutorial.name }}  {{tutorial.id}} </a><br>
+		<form [formGroup]="updateForm" >
+      <div class="form-group">
+        <input type="number" class="form-control" formControlName="id" id="exampleInputId" value="{{tutorial.id}}" > <br>
+        <input type="text" class="form-control" formControlName="name" id="exampleInputName"  value="{{tutorial.name}}"  > 
+        <input type="text" class="form-control" formControlName="email" id="exampleInputEmail1" value="{{tutorial.email}}" >
+      </div>
+		</form>
+    <button class="btn btn-primary" (click)="editTutorial()">Update</button>
+    <button class="btn btn-primary" (click)="delTutorial(i)">Delete</button>		
+	</li>	 
+</ul>
+</div>    
+
+
+
+  
+
