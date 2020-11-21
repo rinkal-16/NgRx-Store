@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AppState } from '../app.state';
 import { Tutorial } from '../models/tutorial.model';
-import { AddTutorial, GetTutorial, RemoveTutorial } from '../actions/tutorial.actions';
+import { AddTutorial, GetTutorial, RemoveTutorial, EditTutorial } from '../actions/tutorial.actions';
+import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
+import * as TutorialActions from './../actions/tutorial.actions';
 
 @Component({
   selector: 'app-write',
@@ -18,7 +20,13 @@ export class WriteComponent implements OnInit {
   error$: Observable<Error>
   newTutorialData: Tutorial = {id:'', name:'', email:''}
 
-  constructor(private store: Store<AppState>) { }
+  public updateForm = this.formBuilder.group({
+    id: new FormControl('', [Validators.required]),
+    name : new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required])
+});
+
+  constructor(private store: Store<AppState>, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.tutorialDatas =  this.store.select(store => store.tutorial.list);
@@ -35,6 +43,14 @@ export class WriteComponent implements OnInit {
 
   deleteData(id: string) {
     this.store.dispatch(new RemoveTutorial(id));
+  }
+
+  editData() {
+    this.store.dispatch(new EditTutorial(this.newTutorialData));
+    // this.newTutorialData = {id:'', name:'', email:''};
+    // console.log(this.newTutorialData);
+    this.store.dispatch(new TutorialActions.EditTutorial({id: this.updateForm.value.id,
+   	 name: this.updateForm.value.name, email: this.updateForm.value.email}));
   }
 
 }

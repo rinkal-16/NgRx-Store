@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Tutorial } from '../models/tutorial.model';
 import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class TodoServiceService {
   deleteData(id: string) {
     return this.http.delete(`${this.db_Url}/${id}`)
       .pipe(delay(500))
+  }
+
+  editData(formData: any): Observable<Tutorial> {
+    let form: FormData = new FormData();
+    form.append('id', formData.id);
+    form.append('name', formData.name);    
+    form.append('email', formData.email);
+    return this.http.post<Tutorial>(`${this.db_Url}`, form);
   }
   
 }

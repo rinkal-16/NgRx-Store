@@ -6,8 +6,15 @@
       </h2>
 
         <ul *ngIf="(tutorialDatas | async); else noItems">
-          <li *ngFor="let data of tutorialDatas | async" (click)="deleteData(data.id)">
+          <li *ngFor="let data of tutorialDatas | async; let i = index" >
             <span>{{ data.name }}</span>
+            <button class="btn btn-primary" (click)="deleteData(data.id)">Delete</button>
+            <form (ngSubmit)="editData()" [formGroup]="updateForm">
+              <input type="text" [(ngModel)]="newTutorialData.id" formControlName="id" value="{{data.id}}" placeholder="Item" name="itemId"/>
+              <input type="text" [(ngModel)]="newTutorialData.name" formControlName="name" value="{{data.name}}" placeholder="Item" name="itemName"/>
+              <input type="text" [(ngModel)]="newTutorialData.email" formControlName="email" value="{{data.email}}" placeholder="Item" name="itemEmail"/>              
+            </form>
+            <button type="submit" (click)="editData()">Edit</button>
           </li>
         </ul>
 
@@ -22,6 +29,8 @@
       <input type="text" [(ngModel)]="newTutorialData.name" placeholder="Item" name="itemName"/>
       <button type="submit" >+</button>
     </form>
+
+    
   </div>
 </div>
 

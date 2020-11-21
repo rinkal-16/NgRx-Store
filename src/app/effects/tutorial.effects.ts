@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TodoServiceService } from '../services/todo-service.service';
-import { TutorialActionType, GetTutorial, GetTutorialSuccess, GetTutorialFailure, AddTutorial, AddTutorialSuccess, AddTutorialFailure, RemoveTutorial, RemoveTutorialSuccess, RemoveTutorialFailure } from '../actions/tutorial.actions';
+import { TutorialActionType, GetTutorial, GetTutorialSuccess, GetTutorialFailure, AddTutorial, AddTutorialSuccess, AddTutorialFailure, RemoveTutorial, RemoveTutorialSuccess, RemoveTutorialFailure, EditTutorial, EditTutorialSuccess, EditTutorialFailure } from '../actions/tutorial.actions';
 
 @Injectable()
 export class TutorialEffects {
@@ -46,5 +46,17 @@ export class TutorialEffects {
                          catchError(error => of(new RemoveTutorialFailure(error)))
                     ) 
                )
-          )     
+          )  
+          
+     @Effect() editTutorial$ = this.action$
+          .pipe(
+               ofType<EditTutorial>(TutorialActionType.EDIT_TUTORIAL),
+               mergeMap(
+                    (data) => this.tutorialService.editData(data.payload)
+                    .pipe(
+                         map(() => new EditTutorialSuccess(data.payload)),
+                         catchError(error => of(new EditTutorialFailure(error)))
+                    )
+               )
+          )
 }
