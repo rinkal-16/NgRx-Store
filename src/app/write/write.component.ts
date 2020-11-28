@@ -46,7 +46,7 @@ export class WriteComponent implements OnInit {
   }
 
   editData() {
-    this.store.dispatch(new EditTutorial(this.newTutorialData));
+    //this.store.dispatch(new EditTutorial(this.newTutorialData));
     // this.newTutorialData = {id:'', name:'', email:''};
     // console.log(this.newTutorialData);
     this.store.dispatch(new TutorialActions.EditTutorial({id: this.updateForm.value.id,

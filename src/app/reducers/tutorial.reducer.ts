@@ -9,32 +9,32 @@ const initialState: Tutorial = {
      email: 'http://google.com'     
 }
 
-export function reducer(state: Tutorial[] = [initialState], action: Actions) {
-     let index, active, list;
-     switch(action.type) {
-          case TutorialActionType.ADD_TUTORIAL:
-               return [...state, action.payload];
-          case TutorialActionType.GET_TUTORIAL:
-               let id: number = (action.payload);
-               return state;     
-          case TutorialActionType.REMOVE_TUTORIAL:                
-               const array = [...state];
-               array.splice(action.payload, 1);
-               return array;  
-          case TutorialActionType.EDIT_TUTORIAL:
-               const index = state.findIndex(item => item.id == action.payload.id);
-               list = [...state];               
-               list[index] = action.payload;
-               console.log(list[index], action.payload);
-               console.log(Object.assign({}, state, { list }));
-               return list;               
-          case TutorialActionType.RESET_TUTORIAL:
-               return initialState;     
-          default:
-               return [...state];
+// export function reducer(state: Tutorial[] = [initialState], action: Actions) {
+//      let index, active, list;
+//      switch(action.type) {
+//           case TutorialActionType.ADD_TUTORIAL:
+//                return [...state, action.payload];
+//           case TutorialActionType.GET_TUTORIAL:
+//                let id: number = (action.payload);
+//                return state;     
+//           case TutorialActionType.REMOVE_TUTORIAL:                
+//                const array = [...state];
+//                array.splice(action.payload, 1);
+//                return array;  
+//           case TutorialActionType.EDIT_TUTORIAL:
+//                const index = state.findIndex(item => item.id == action.payload.id);
+//                list = [...state];               
+//                list[index] = action.payload;
+//                console.log(list[index], action.payload);
+//                console.log(Object.assign({}, state, { list }));
+//                return list;               
+//           case TutorialActionType.RESET_TUTORIAL:
+//                return initialState;     
+//           default:
+//                return [...state];
 
-     }
-}
+//      }
+// }
 
 
 //Service Effect

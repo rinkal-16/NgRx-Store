@@ -7,6 +7,7 @@ import * as TutorialActions from './../actions/tutorial.actions';
 import { FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { createStore } from 'redux';
 import combineReducers from '../reducers/index'; 
+import { TutorialState } from '../reducers/tutorial.reducer';
 
 const store = createStore(combineReducers)
 console.log(store.getState())
@@ -34,7 +35,7 @@ export class ReadComponent implements OnInit {
 
 	editEnable: boolean;
 	showBool: boolean;
-	tutorials: Observable<Tutorial[]>;
+	tutorials: Observable<TutorialState>;  //<Tutorial>
 
   constructor(private store: Store<AppState>, private formBuilder: FormBuilder) {
 	this.showBool = true;
